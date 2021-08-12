@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CSS TABLE</title>
+	<style>
+		table {
+			width: 100%;
+			font-size: 2em;
+			text-align: center;
+			font-family: monospace;
+			font-variant: small-caps;
+		}
+		table, thead, tbody, td {
+			border-collapse: collapse;
+			padding: 2px;
+		}
+		thead {
+			background: limegreen;
+			font-weight: bolder;
+			color: #fff;
+		}
+		tbody tr:nth-child(odd) {background: lightgray;}
+		tbody tr:nth-child(even) {background: white;}
+		tbody tr:hover {background: lightblue;}
+
+		article p {color: brown;}
+		article > p {background: lightgray;}
+		article + p {background: lightblue;}
+		p ~ span {background: red;}
+	</style>
+</head>
+<body>
+	<table>
+		<caption>Signer Group</caption>
+		<thead>
+			<td>N<u>o</u></td>
+			<td>ID</td>
+			<td>First Name</td>
+			<td>Last Name</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>UGR/17757/11</td>
+				<td>Wendirad</td>
+				<td>Demelash</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>UGR/17153/11</td>
+				<td>Getabalew</td>
+				<td>Temesgen</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>UGR/16812/11</td>
+				<td>Ashenafi</td>
+				<td>Zenebe</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<section>
+		<article>
+			<p>Loream Ipsum, Loream Ipsum ,Loream IpsumLoream IpsumLoream IpsumLoream Ipsum, Loream IpsumLoream IpsumLoream Ipsum, Loream Ipsum Loream Ipsum, Loream Ipsum ,Loream IpsumLoream IpsumLoream IpsumLoream Ipsum, Loream IpsumLoream IpsumLoream Ipsum, Loream Ipsum Loream Ipsum, Loream Ipsum ,Loream IpsumLoream IpsumLoream IpsumLoream Ipsum, Loream IpsumLoream IpsumLoream Ipsum, Loream Ipsum Loream Ipsum, Loream Ipsum ,Loream IpsumLoream IpsumLoream IpsumLoream Ipsum, Loream IpsumLoream IpsumLoream Ipsum, Loream Ipsum</p>
+			<div>
+				<p>Special Paragraph. Special Paragraph. Special Paragraph. Special Paragraph.</p>
+			</div>
+		</article>
+		<p>Next Paragraph. Next Paragraph Next Paragraph Next ParagraphNext Paragraph. Next Paragraph. Next Paragraph Next Paragraph Next ParagraphNext Paragraph.Next Paragraph. Next Paragraph Next Paragraph Next ParagraphNext Paragraph</p>
+		<span>
+		Next to Paragraph, Next to Paragraph, Next to Paragraph, Next to Paragraph, Next to Paragraph, Next to Paragraph, Next to Paragraph, Next to Paragraph</span>
+	</section>
+</body>
+</html>
