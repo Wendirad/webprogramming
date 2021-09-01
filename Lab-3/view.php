@@ -28,23 +28,28 @@
 		<tbody>
 <?php
 	require_once "connection.php";
-
-	$list_sql = "SELECT id, username, password FROM users";
-	if ($stmt = $link->prepare($list_sql)) {
-		$stmt->execute();
-		$stmt->bind_result($id, $username, $password);
-		while($stmt->fetch()) {?>
-			<tr>
-				<td><?php  echo $id; ?></td>
-				<td><?php  echo $username; ?></td>
-				<td><?php  echo $password; ?></td>
-				<td><a href="edit.php?id=<?php echo $id; ?>">edit</a></td>
-				<td><a href="delete.php?id=<?php echo $id; ?>">delete</a></td>
-			</tr>
-			<?php
-		}
+	session_start();
+	if (!isset($_SESSION['user_id'])) {
+		header("Location: login.php");
 	} else {
-		echo $link->error;
+
+		$list_sql = "SELECT id, username, password FROM users";
+		if ($stmt = $link->prepare($list_sql)) {
+			$stmt->execute();
+			$stmt->bind_result($id, $username, $password);
+			while($stmt->fetch()) {?>
+				<tr>
+					<td><?php  echo $id; ?></td>
+					<td><?php  echo $username; ?></td>
+					<td><?php  echo $password; ?></td>
+					<td><a href="edit.php?id=<?php echo $id; ?>">edit</a></td>
+					<td><a href="delete.php?id=<?php echo $id; ?>">delete</a></td>
+				</tr>
+				<?php
+			}
+		} else {
+			echo $link->error;
+		}
 	}
 ?>
 		</tbody>

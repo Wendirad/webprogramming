@@ -1,40 +1,45 @@
 <?php
 	require_once "connection.php";
+	session_start();
 
-	$user_id = $_GET['id'];
-	if ($_SERVER['REQUEST_METHOD'] == "GET"){
-		$sql = "SELECT username, password FROM users WHERE id = ?";
-		if ($stmt = $link->prepare($sql)) {
-			$stmt->bind_param("d", $param_id);
-			$param_id = $user_id;
-			if ($stmt->execute()){
-				$stmt->bind_result($d_username, $d_password);
-				$stmt->fetch();
+	if (!isset($_SESSION['user_id'])) {
+		header("Location: login.php");
+	} else {
+		$user_id = $_GET['id'];
+		if ($_SERVER['REQUEST_METHOD'] == "GET"){
+			$sql = "SELECT username, password FROM users WHERE id = ?";
+			if ($stmt = $link->prepare($sql)) {
+				$stmt->bind_param("d", $param_id);
+				$param_id = $user_id;
+				if ($stmt->execute()){
+					$stmt->bind_result($d_username, $d_password);
+					$stmt->fetch();
+				} else {
+					echo $link->error;
+				}
 			} else {
 				echo $link->error;
 			}
 		} else {
-			echo $link->error;
-		}
-	} else {
-		$username = $link->real_escape_string($_POST['username']);
-		$password = $link->real_escape_string($_POST['password']);
-		$user_id = $link->real_escape_string($_POST['user_id']);
-		$edit_sql = "UPDATE users SET username=?, password=? WHERE id = ?";
+			$username = $link->real_escape_string($_POST['username']);
+			$password = $link->real_escape_string($_POST['password']);
+			$user_id = $link->real_escape_string($_POST['user_id']);
+			$edit_sql = "UPDATE users SET username=?, password=? WHERE id = ?";
 
-		if ($stmt = $link->prepare($edit_sql)) {
-			$stmt->bind_param("ssd", $param_username, $param_password, $param_id);
-			$param_username = $username;
-			$param_password = $password;
-			$param_id = $user_id;
+			if ($stmt = $link->prepare($edit_sql)) {
+				$stmt->bind_param("ssd", $param_username, $param_password, $param_id);
+				$param_username = $username;
+				$param_password = $password;
+				$param_id = $user_id;
 
-			if ($stmt->execute()) {
-				header("Location: view.php");
-			}  else {
+				if ($stmt->execute()) {
+					header("Location: view.php");
+				}  else {
+					echo $link->error;
+				}
+			} else {
 				echo $link->error;
 			}
-		} else {
-			echo $link->error;
 		}
 	}
 ?>
